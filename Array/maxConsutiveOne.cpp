@@ -10,10 +10,8 @@ public:
     {
         int maxLne = 0;
         int currlen = 0;
-
         for (int i = 0; i < a.size(); i++)
         {
-
             if (a[i] == 1)
             {
                 currlen++;
@@ -24,7 +22,6 @@ public:
                 currlen = 0;
             }
         }
-
         return maxLne;
     }
 };
