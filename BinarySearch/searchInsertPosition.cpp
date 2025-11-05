@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution
+{
+public:
+    int searchInsert(vector<int> &nums, int target)
+    {
+        int left = 0, right = nums.size() - 1;
+
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target)
+            {
+                return mid; // target found
+            }
+            else if (nums[mid] < target)
+            {
+                left = mid + 1; // search right
+            }
+            else
+            {
+                right = mid - 1; // search left
+            }
+        }
+
+        // target not found, return insertion index
+        return left;
+    }
+};
+
+int main()
+{
+    Solution solution;
+    vector<int> nums = {1, 3, 5, 6};
+    int target;
+
+    cout << "Enter target value: ";
+    cin >> target;
+
+    int index = solution.searchInsert(nums, target);
+    cout << "Insert position: " << index << endl;
+
+    return 0;
+}
