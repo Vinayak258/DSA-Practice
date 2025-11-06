@@ -15,19 +15,17 @@ public:
 
             if (nums[mid] == target)
             {
-                return mid; // target found
+                return mid;
             }
             else if (nums[mid] < target)
             {
-                left = mid + 1; // search right
+                left = mid + 1;
             }
             else
             {
-                right = mid - 1; // search left
+                right = mid - 1;
             }
         }
-
-        // target not found, return insertion index
         return left;
     }
 };
