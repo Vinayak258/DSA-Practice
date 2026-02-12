@@ -5,10 +5,9 @@ int maxRotateSum(vector<int> &arr)
 {
     int n = arr.size();
 
-    int arrSum = 0;  // Sum of all array elements
-    int currVal = 0; // Value of sum(i * arr[i]) for current rotation
+    int arrSum = 0;
+    int currVal = 0;
 
-    // Calculate arrSum and initial currVal
     for (int i = 0; i < n; i++)
     {
         arrSum += arr[i];
@@ -17,7 +16,6 @@ int maxRotateSum(vector<int> &arr)
 
     int maxVal = currVal;
 
-    // Compute values for other rotations
     for (int i = 1; i < n; i++)
     {
         currVal = currVal + arrSum - n * arr[n - i];
