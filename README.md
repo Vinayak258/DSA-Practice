@@ -1,40 +1,99 @@
-# DSA Practice Repository
+# 🚀 DSA Practice Repository
 
-This repository contains my **Data Structures & Algorithms (DSA) practice**.  
-I am solving problems topic-wise from the following curated sheets:
-
-- **Striver’s SDE Sheet**  
-- **CodeBaba DSA Sheet**  
-
-The purpose of this repository is to **track my daily progress, organize problems by topic, and improve problem-solving skills**.  
+A structured collection of Data Structures & Algorithms (DSA) problems solved in C++, organized topic-wise for efficient learning and revision.
 
 ---
 
-## 📂 Folder Structure
+## 📂 Repository Structure
 
-The repository is organized **topic-wise**, with each folder containing solutions for multiple problems:
+The repository is organized by core DSA topics. Each folder contains multiple problems with clear and descriptive filenames.
 
+```
 DSA-Practice/
-├── arrays/ # Array-related problems
-├── binary_search/ # Binary Search & related questions
-├── linked_list/ # Linked List problems
-├── stack_queue/ # Stack & Queue problems
-├── recursion/ # Recursion problems
-├── tree/ # Binary Tree & Binary Search Tree
-├── graph/ # Graph-related problems
-├── dynamic_programming/ # DP problems
-└── README.md # This file
+│
+├── arrays/                # Array-based problems
+├── binary_search/         # Binary Search & variations
+├── linked_list/           # Linked List problems
+├── stack_queue/           # Stack & Queue problems
+├── recursion/             # Recursion & Backtracking
+├── tree/                  # Binary Tree & BST
+├── graph/                 # Graph algorithms (BFS, DFS, etc.)
+├── dynamic_programming/   # DP problems (memoization, tabulation)
+│
+└── README.md              # Project documentation
+```
 
+---
 
-Inside each topic folder, files are named according to the problem for clarity, e.g.,
+## 📌 Problem Organization
 
-🔗 Resources
+* Each file is named after the problem it solves
+* Clean and readable C++ implementations
+* Focus on clarity + optimal approaches
 
-Striver’s SDE Sheet
-CodeBaba DSA Sheet
+Example:
 
-📌 Goals
+```
+arrays/two_sum.cpp
+graph/rotten_oranges.cpp
+dynamic_programming/knapsack.cpp
+```
 
-Solve all problems in Striver & CodeBaba sheets.
-Strengthen problem-solving skills for coding interviews.
-Maintain a well-organized, topic-wise solution repository.
+---
+
+## 🎯 Goals
+
+* 📚 Solve all problems from:
+
+  * Striver’s SDE Sheet
+  * CodeBaba DSA Sheet
+* 🧠 Strengthen problem-solving & logical thinking
+* 💼 Prepare for coding interviews (FAANG & top companies)
+* 🗂 Maintain a well-structured and revision-friendly repository
+
+---
+
+## 🛠️ Tech Stack
+
+* Language: **C++ (STL)**
+* Concepts: DSA, Algorithms, Problem Solving
+
+---
+
+## 🔗 Resources
+
+* Striver’s SDE Sheet
+* CodeBabar DSA Sheet
+
+---
+
+## 📈 Progress Tracking
+
+* Consistent daily/weekly problem solving
+* Gradual coverage of all major DSA topics
+* Focus on both **optimal solutions** and **understanding patterns**
+
+---
+
+## 🤝 Contribution
+
+This is a personal learning repository, but suggestions and improvements are always welcome!
+
+---
+
+## ⭐ Support
+
+If you find this repository helpful:
+
+* Star ⭐ the repo
+* Share with others preparing for DSA
+
+---
+
+## 🧑‍💻 Author
+
+**Vinayak Ojha**
+
+---
+
+> “Consistency beats intensity in DSA preparation.”
