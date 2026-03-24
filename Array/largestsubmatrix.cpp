@@ -37,7 +37,7 @@ int main() {
     cin >> m >> n;
 
     vector<vector<int>> matrix(m, vector<int>(n));
-
+    
     cout << "Enter the matrix (0s and 1s):\n";
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
