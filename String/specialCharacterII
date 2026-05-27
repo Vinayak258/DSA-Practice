@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+    int numberOfSpecialChars(string word)
+    {
+
+        int ans = 0;
+
+        for (char ch = 'a'; ch <= 'z'; ch++)
+        {
+
+            bool small = false;
+            bool capital = false;
+
+            int lastSmall = -1;
+            int firstCapital = -1;
+
+            for (int i = 0; i < word.size(); i++)
+            {
+
+                if (word[i] == ch)
+                {
+                    small = true;
+                    lastSmall = i;
+                }
+
+                if (word[i] == ch - 32)
+                {
+
+                    capital = true;
+
+                    if (firstCapital == -1)
+                    {
+                        firstCapital = i;
+                    }
+                }
+            }
+
+            if (small && capital && lastSmall < firstCapital)
+            {
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+};
+
+int main()
+{
+
+    Solution obj;
+
+    string word;
+    cin >> word;
+
+    cout << obj.numberOfSpecialChars(word);
+
+    return 0;
+}
