@@ -72,6 +72,7 @@ int main()
     Solution obj;
 
     cout << obj.binarySearchable(arr) << endl;
+    cout << endl;
 
     return 0;
 }
