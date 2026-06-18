@@ -12,25 +12,51 @@ public:
 
         int ans = 0;
 
-        int dx[] = {-1, 1, 0, 0};
-        int dy[] = {0, 0, -1, 1};
-
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < m; j++)
             {
+
                 if (mat[i][j] == 0)
                 {
-                    for (int k = 0; k < 4; k++)
-                    {
-                        int ni = i + dx[k];
-                        int nj = j + dy[k];
 
-                        if (ni >= 0 && ni < n &&
-                            nj >= 0 && nj < m &&
-                            mat[ni][nj] == 1)
+                    // Up
+                    for (int r = i - 1; r >= 0; r--)
+                    {
+                        if (mat[r][j] == 1)
                         {
                             ans++;
+                            break;
+                        }
+                    }
+
+                    // Down
+                    for (int r = i + 1; r < n; r++)
+                    {
+                        if (mat[r][j] == 1)
+                        {
+                            ans++;
+                            break;
+                        }
+                    }
+
+                    // Left
+                    for (int c = j - 1; c >= 0; c--)
+                    {
+                        if (mat[i][c] == 1)
+                        {
+                            ans++;
+                            break;
+                        }
+                    }
+
+                    // Right
+                    for (int c = j + 1; c < m; c++)
+                    {
+                        if (mat[i][c] == 1)
+                        {
+                            ans++;
+                            break;
                         }
                     }
                 }
@@ -40,7 +66,6 @@ public:
         return ans;
     }
 };
-
 int main()
 {
     int n, m;
