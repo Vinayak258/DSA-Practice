@@ -73,6 +73,7 @@ int main()
 
     cout << obj.binarySearchable(arr) << endl;
     cout << endl;
+    
 
     return 0;
 }
