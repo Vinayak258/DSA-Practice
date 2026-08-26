@@ -1,0 +1,88 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Solution
+{
+public:
+    string shortestBeautifulSubstring(string s, int k)
+    {
+        int n = s.size();
+
+        int left = 0;
+        int ones = 0;
+
+        string ans = "";
+
+        for (int right = 0; right < n; right++)
+        {
+
+            // Add current character
+            if (s[right] == '1')
+            {
+                ones++;
+            }
+
+            // If number of 1s becomes greater than k,
+            // move left pointer forward.
+            while (ones > k)
+            {
+                if (s[left] == '1')
+                {
+                    ones--;
+                }
+                left++;
+            }
+
+            // We have exactly k ones
+            if (ones == k)
+            {
+
+                // Remove unnecessary leading zeroes
+                while (left <= right && s[left] == '0')
+                {
+                    left++;
+                }
+
+                // Create current beautiful substring
+                string curr = s.substr(left, right - left + 1);
+
+                // Choose the shortest substring
+                if (ans.empty() || curr.size() < ans.size())
+                {
+                    ans = curr;
+                }
+
+                // If lengths are equal,
+                // choose lexicographically smaller substring
+                else if (curr.size() == ans.size() && curr < ans)
+                {
+                    ans = curr;
+                }
+            }
+        }
+
+        return ans;
+    }
+};
+
+int main()
+{
+
+    Solution obj;
+
+    string s;
+    int k;
+
+    cout << "Enter binary string: ";
+    cin >> s;
+
+    cout << "Enter k: ";
+    cin >> k;
+
+    string result = obj.shortestBeautifulSubstring(s, k);
+
+    cout << "Shortest Beautiful Substring: " << result << endl;
+
+    return 0;
+}
