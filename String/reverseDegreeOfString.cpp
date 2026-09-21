@@ -2,12 +2,15 @@
 #include <string>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    int reverseDegree(string s) {
+    int reverseDegree(string s)
+    {
         int ans = 0;
 
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < s.length(); i++)
+        {
             // Reverse alphabet value:
             // a = 26, b = 25, ..., z = 1
             int value = 26 - (s[i] - 'a');
@@ -22,7 +25,8 @@ public:
     }
 };
 
-int main() {
+int main()
+{
     Solution obj;
 
     string s;
