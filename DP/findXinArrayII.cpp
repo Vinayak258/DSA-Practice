@@ -1,17 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Node {
+struct Node
+{
     int cnt[5] = {0};
     int prod = 0;
 };
 
-class SegmentTree {
+class SegmentTree
+{
 public:
     int n, k;
     vector<Node> segTree;
 
-    SegmentTree(vector<int>& nums, int k) {
+    SegmentTree(vector<int> &nums, int k)
+    {
         this->k = k;
         n = nums.size();
 
@@ -21,9 +24,11 @@ public:
     }
 
     // Build segment tree
-    void build(int i, int l, int r, vector<int>& nums) {
+    void build(int i, int l, int r, vector<int> &nums)
+    {
 
-        if (l == r) {
+        if (l == r)
+        {
             leafNode(i, nums[l]);
             return;
         }
@@ -35,14 +40,15 @@ public:
 
         segTree[i] = mergeNodes(
             segTree[2 * i + 1],
-            segTree[2 * i + 2]
-        );
+            segTree[2 * i + 2]);
     }
 
     // Create node for one element
-    void leafNode(int i, int value) {
+    void leafNode(int i, int value)
+    {
 
-        for (int x = 0; x < k; x++) {
+        for (int x = 0; x < k; x++)
+        {
             segTree[i].cnt[x] = 0;
         }
 
@@ -56,7 +62,8 @@ public:
     }
 
     // Merge two adjacent nodes
-    Node mergeNodes(const Node& left, const Node& right) {
+    Node mergeNodes(const Node &left, const Node &right)
+    {
 
         Node result;
 
@@ -64,12 +71,14 @@ public:
         result.prod = (left.prod * right.prod) % k;
 
         // Prefixes completely inside left
-        for (int x = 0; x < k; x++) {
+        for (int x = 0; x < k; x++)
+        {
             result.cnt[x] = left.cnt[x];
         }
 
         // Prefixes which extend from left into right
-        for (int x = 0; x < k; x++) {
+        for (int x = 0; x < k; x++)
+        {
 
             int newRem = (left.prod * x) % k;
 
@@ -85,53 +94,53 @@ public:
         int l,
         int r,
         int index,
-        int value
-    ) {
+        int value)
+    {
 
-        if (l == r) {
+        if (l == r)
+        {
             leafNode(i, value);
             return;
         }
 
         int mid = l + (r - l) / 2;
 
-        if (index <= mid) {
+        if (index <= mid)
+        {
 
             segTreeUpdate(
                 2 * i + 1,
                 l,
                 mid,
                 index,
-                value
-            );
-
-        } else {
+                value);
+        }
+        else
+        {
 
             segTreeUpdate(
                 2 * i + 2,
                 mid + 1,
                 r,
                 index,
-                value
-            );
+                value);
         }
 
         // Recalculate current node
         segTree[i] = mergeNodes(
             segTree[2 * i + 1],
-            segTree[2 * i + 2]
-        );
+            segTree[2 * i + 2]);
     }
 
-    void update(int index, int value) {
+    void update(int index, int value)
+    {
 
         segTreeUpdate(
             0,
             0,
             n - 1,
             index,
-            value
-        );
+            value);
     }
 
     // Query range [start, end]
@@ -140,38 +149,39 @@ public:
         int end,
         int i,
         int l,
-        int r
-    ) {
+        int r)
+    {
 
         // Complete overlap
-        if (l >= start && r <= end) {
+        if (l >= start && r <= end)
+        {
             return segTree[i];
         }
 
         int mid = l + (r - l) / 2;
 
         // Query completely in left
-        if (end <= mid) {
+        if (end <= mid)
+        {
 
             return segTreeQuery(
                 start,
                 end,
                 2 * i + 1,
                 l,
-                mid
-            );
+                mid);
         }
 
         // Query completely in right
-        if (start > mid) {
+        if (start > mid)
+        {
 
             return segTreeQuery(
                 start,
                 end,
                 2 * i + 2,
                 mid + 1,
-                r
-            );
+                r);
         }
 
         // Query both sides
@@ -180,33 +190,32 @@ public:
             end,
             2 * i + 1,
             l,
-            mid
-        );
+            mid);
 
         Node right = segTreeQuery(
             start,
             end,
             2 * i + 2,
             mid + 1,
-            r
-        );
+            r);
 
         return mergeNodes(left, right);
     }
 
-    Node query(int start, int end) {
+    Node query(int start, int end)
+    {
 
         return segTreeQuery(
             start,
             end,
             0,
             0,
-            n - 1
-        );
+            n - 1);
     }
 };
 
-int main() {
+int main()
+{
 
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -217,7 +226,8 @@ int main() {
 
     vector<int> nums(n);
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         cin >> nums[i];
     }
 
@@ -226,19 +236,18 @@ int main() {
 
     vector<vector<int>> queries(q, vector<int>(4));
 
-    for (int i = 0; i < q; i++) {
+    for (int i = 0; i < q; i++)
+    {
 
-        cin >> queries[i][0]
-            >> queries[i][1]
-            >> queries[i][2]
-            >> queries[i][3];
+        cin >> queries[i][0] >> queries[i][1] >> queries[i][2] >> queries[i][3];
     }
 
     SegmentTree segTree(nums, k);
 
     vector<int> result;
 
-    for (auto& query : queries) {
+    for (auto &query : queries)
+    {
 
         int index = query[0];
         int value = query[1];
@@ -256,7 +265,8 @@ int main() {
     }
 
     // Print answer
-    for (int x : result) {
+    for (int x : result)
+    {
         cout << x << " ";
     }
 
