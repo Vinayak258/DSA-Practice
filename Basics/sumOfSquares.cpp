@@ -1,0 +1,35 @@
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution
+{
+public:
+    int sumOfSquares(vector<int> &nums)
+    {
+        int n = nums.size();
+        int sum = 0;
+
+        for (int i = 1; i <= n; i++)
+        {
+            if (n % i == 0)
+            {
+                sum += nums[i - 1] * nums[i - 1];
+            }
+        }
+
+        return sum;
+    }
+};
+
+int main()
+{
+    Solution sol;
+
+    vector<int> nums = {1, 2, 3, 4};
+
+    cout << sol.sumOfSquares(nums) << endl;
+
+    return 0;
+}
