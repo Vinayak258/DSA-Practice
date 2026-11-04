@@ -1,0 +1,127 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+    int n, x, k;
+
+    vector<long long> minOpsSubarray;
+    vector<vector<long long>> memo;
+
+    const long long INF = 1e16;
+
+    long long solve(int count, int i) {
+        if (count == k)
+            return 0;
+
+        int elementsNeeded = (k - count) * x;
+
+        if (i + elementsNeeded > n)
+            return INF;
+
+        if (memo[count][i] != -1)
+            return memo[count][i];
+
+        long long take =
+            minOpsSubarray[i] + solve(count + 1, i + x);
+
+        long long skip = solve(count, i + 1);
+
+        return memo[count][i] = min(take, skip);
+    }
+
+public:
+    long long minOperations(vector<int>& nums, int x, int k) {
+        n = nums.size();
+        this->x = x;
+        this->k = k;
+
+        minOpsSubarray.assign(n + 1, 0);
+        memo.assign(k + 1, vector<long long>(n + 1, -1));
+
+        multiset<int> left, right;
+
+        long long leftSum = 0, rightSum = 0;
+        int leftSize = 0, rightSize = 0;
+
+        auto addLeft = [&](int val) {
+            left.insert(val);
+            leftSum += val;
+            leftSize++;
+        };
+
+        auto addRight = [&](int val) {
+            right.insert(val);
+            rightSum += val;
+            rightSize++;
+        };
+
+        auto removeLeft = [&](int val) {
+            left.erase(left.find(val));
+            leftSum -= val;
+            leftSize--;
+        };
+
+        auto removeRight = [&](int val) {
+            right.erase(right.find(val));
+            rightSum -= val;
+            rightSize--;
+        };
+
+        auto balance = [&]() {
+            while (leftSize > rightSize + 1) {
+                int val = *left.rbegin();
+                removeLeft(val);
+                addRight(val);
+            }
+
+            while (leftSize < rightSize) {
+                int val = *right.begin();
+                removeRight(val);
+                addLeft(val);
+            }
+        };
+
+        for (int i = 0; i < n; i++) {
+            int val = nums[i];
+
+            if (left.empty() || val <= *left.rbegin())
+                addLeft(val);
+            else
+                addRight(val);
+
+            balance();
+
+            if (i >= x - 1) {
+                long long median = *left.rbegin();
+
+                minOpsSubarray[i - x + 1] =
+                    median * leftSize - leftSum +
+                    rightSum - median * rightSize;
+
+                int removeVal = nums[i - x + 1];
+
+                if (left.find(removeVal) != left.end())
+                    removeLeft(removeVal);
+                else
+                    removeRight(removeVal);
+
+                balance();
+            }
+        }
+
+        return solve(0, 0);
+    }
+};
+
+int main() {
+    Solution obj;
+
+    vector<int> nums = {5, -2, 1, 3, 7, 3, 6, 4, -1};
+
+    int x = 3;
+    int k = 2;
+
+    cout << obj.minOperations(nums, x, k) << endl;
+
+    return 0;
+}
