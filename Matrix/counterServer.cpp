@@ -1,0 +1,88 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+    vector<int> countServers(int n, vector<vector<int>> &logs, int x, vector<int> &queries)
+    {
+
+        int m = queries.size();
+
+        sort(logs.begin(), logs.end(), [](auto &a, auto &b)
+             { return a[1] < b[1]; });
+
+        vector<pair<int, int>> q;
+
+        for (int i = 0; i < m; i++)
+        {
+            q.push_back({queries[i], i});
+        }
+
+        sort(q.begin(), q.end());
+
+        vector<int> freq(n + 1, 0);
+        vector<int> ans(m);
+
+        int left = 0, right = 0;
+        int active = 0;
+
+        for (auto [time, idx] : q)
+        {
+
+            while (right < logs.size() && logs[right][1] <= time)
+            {
+                int server = logs[right][0];
+
+                if (freq[server] == 0)
+                    active++;
+
+                freq[server]++;
+                right++;
+            }
+
+            while (left < right && logs[left][1] < time - x)
+            {
+                int server = logs[left][0];
+
+                freq[server]--;
+
+                if (freq[server] == 0)
+                    active--;
+
+                left++;
+            }
+
+            ans[idx] = n - active;
+        }
+
+        return ans;
+    }
+};
+
+int main()
+{
+    Solution obj;
+
+    int n = 3;
+    vector<vector<int>> logs = {
+        {1, 3},
+        {2, 6},
+        {1, 5}};
+
+    int x = 5;
+
+    vector<int> queries = {10, 11};
+
+    vector<int> result = obj.countServers(n, logs, x, queries);
+
+    for (int val : result)
+    {
+        cout << val << " ";
+    }
+
+    cout << endl;
+
+    return 0;
+}
